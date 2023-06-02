@@ -1,5 +1,13 @@
-import { Box } from '@chakra-ui/react';
+import { Routes, Route } from 'react-router-dom';
+
+import { Home } from './pages/Home';
 
 export function App() {
-  return <Box color="gray.500">Hello World!</Box>;
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </>
+  );
 }
