@@ -1,5 +1,10 @@
-import { Box } from '@chakra-ui/react';
+import { Box } from "@chakra-ui/react";
+import { InputField } from "../components/InputField";
 
 export function Home() {
-  return <Box>Home</Box>;
+  return (
+    <Box>
+      <InputField />
+    </Box>
+  );
 }
