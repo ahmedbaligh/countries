@@ -2,11 +2,10 @@ import { Flex, Input } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-export function InputField({ placeholder }) {
+export function InputField({ placeholder, width, value, onInputChange }) {
   return (
     <Flex
       className="search"
-      w="40vw"
       gap={4}
       bg="white"
       p={3}
@@ -14,6 +13,7 @@ export function InputField({ placeholder }) {
       boxShadow="md"
       m={5}
       justify="center"
+      w={width}
     >
       <FontAwesomeIcon icon={faMagnifyingGlass} fontSize={20} color="gray" />
 
@@ -22,8 +22,9 @@ export function InputField({ placeholder }) {
         id="search"
         placeholder={placeholder}
         borderRadius={5}
-        w="80%"
         variant="unstyled"
+        value={value}
+        onChange={onInputChange}
       />
     </Flex>
   );
