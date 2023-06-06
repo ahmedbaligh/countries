@@ -15,7 +15,7 @@ export function Header() {
     <Flex as="header" justify="space-between" p={8} bg={value}>
       <Heading>Where in the World ?</Heading>
       <Button
-        leftIcon={<FontAwesomeIcon icon={faMoon} ontSize={20} />}
+        leftIcon={<FontAwesomeIcon icon={faMoon} fontSize={20} />}
         onClick={toggleColorMode}
       >
         Dark Mode
