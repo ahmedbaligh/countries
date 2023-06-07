@@ -1,58 +1,50 @@
 import React from "react";
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Text, Flex } from "@chakra-ui/react";
 
-function CountryCard(props) {
+function CountryCard({ country }) {
   return (
-    <Box borderWidth="0.25px" bgColor={"gray.600"}>
-      <Image src={props.country.flag} ult="" w="100%" maxH={"300px"} />
+    <Box bg="blue.800" borderRadius="md" pb="16">
+      <Image
+        src={country.flags.svg}
+        alt={country.flags.alt}
+        w="full"
+        h="52"
+        objectFit="cover"
+      />
 
-      <Text
-        display={"flex"}
-        justifyContent={"center"}
-        mt={2}
-        fontSize="4xl"
-        fontWeight="500"
-        lineHeight="short"
+      <Flex
+        flexDirection="column"
+        gap="2"
+        px="8"
+        pt="6"
         color="white"
+        fontWeight="600"
       >
-        {props.country.name}!
-      </Text>
+        <Text as="h2" fontSize="2xl" fontWeight="800" mb="4">
+          {country.name.common}
+        </Text>
 
-      <Text
-        display={"flex"}
-        justifyContent={"center"}
-        mt={2}
-        fontSize="xl"
-        fontWeight="Nunito Sans"
-        lineHeight="short"
-        color="white"
-      >
-        Population: {props.country.population}
-      </Text>
+        <Text>
+          Population: {""}
+          <Text as="span" fontWeight="300">
+            {country.population.toLocaleString()}
+          </Text>
+        </Text>
 
-      <Text
-        display={"flex"}
-        justifyContent={"center"}
-        mt={2}
-        fontSize="xl"
-        fontWeight="Nunito Sans"
-        lineHeight="short"
-        color="white"
-      >
-        Region: {props.country.region}
-      </Text>
+        <Text>
+          Region: {""}
+          <Text as="span" fontWeight="300">
+            {country.region}
+          </Text>
+        </Text>
 
-      <Text
-        display={"flex"}
-        justifyContent={"center"}
-        mt={2}
-        fontSize="xl"
-        fontWeight="Nunito Sans"
-        lineHeight="short"
-        color="white"
-      >
-        Capital: {props.country.capital}
-      </Text>
+        <Text>
+          Capital: {""}
+          <Text as="span" fontWeight="300">
+            {country.capital}
+          </Text>
+        </Text>
+      </Flex>
     </Box>
   );
 }
