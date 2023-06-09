@@ -1,7 +1,7 @@
-import { Flex, Input, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Input, useColorModeValue } from '@chakra-ui/react';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 export function InputField({ placeholder, value, onInputChange, ...props }) {
   return (
@@ -13,8 +13,9 @@ export function InputField({ placeholder, value, onInputChange, ...props }) {
       fontSize="sm"
       fontWeight="600"
       boxShadow="md"
+      borderRadius="md"
       {...props}
-      bg={useColorModeValue("gray.100", "blue.700")}
+      bg={useColorModeValue('gray.100', 'blue.700')}
     >
       <FontAwesomeIcon icon={faMagnifyingGlass} fontSize="1rem" color="gray" />
 
@@ -23,8 +24,7 @@ export function InputField({ placeholder, value, onInputChange, ...props }) {
         fontSize="inherit"
         fontWeight="inherit"
         p="0"
-        _placeholder={{ color: "gray.600" }}
-        borderRadius={5}
+        _placeholder={{ color: 'gray.600' }}
         placeholder={placeholder}
         value={value}
         onChange={onInputChange}
