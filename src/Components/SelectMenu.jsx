@@ -13,11 +13,13 @@ export const SelectMenu = ({
       value={value}
       onChange={onChange}
       w="250px"
+      h="14"
       size="md"
-      bg="blue.800"
-      borderColor="blue.800"
-      color="white"
-      _hover={{ bg: "blue.700", borderColor: "blue.700" }}
+      bg="white"
+      borderColor="white"
+      color="black"
+      shadow="sm"
+      _hover={{ bg: "gray.100", borderColor: "gray.100" }}
       {...props}
     >
       {options.map((option) => (

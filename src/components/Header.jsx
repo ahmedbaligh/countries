@@ -12,7 +12,7 @@ export function Header() {
   const value = useColorModeValue("gray.100", "blue.700");
   const { toggleColorMode } = useColorMode();
   return (
-    <Flex as="header" justify="space-between" p={8} bg={value}>
+    <Flex as="header" justify="space-between" py={8} bg={value}>
       <Heading>Where in the World ?</Heading>
       <Button
         leftIcon={<FontAwesomeIcon icon={faMoon} fontSize={20} />}

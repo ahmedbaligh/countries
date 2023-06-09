@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Grid, Box } from "@chakra-ui/react";
+import { Grid, Box, Flex } from "@chakra-ui/react";
 import axios from "axios";
 
 import CountryCard from "../components/CountryCard";
@@ -45,25 +45,28 @@ export function Home() {
   });
 
   return (
-    <Box>
-      <InputField
-        placeholder="Type a keyword to search with"
-        value={searchQuery}
-        onInputChange={(e) => setSearchQuery(e.target.value)}
-      />
+    <Flex flexDir="column" gap="16">
+      <Flex justify="space-between">
+        <InputField
+          placeholder="Search for a country..."
+          value={searchQuery}
+          onInputChange={(e) => setSearchQuery(e.target.value)}
+          minW="500px"
+        />
 
-      <SelectMenu
-        placeholder="Filter By Region"
-        options={regions}
-        value={selectedRegion}
-        onChange={handleDropdownClick}
-      />
+        <SelectMenu
+          placeholder="Filter By Region"
+          options={regions}
+          value={selectedRegion}
+          onChange={handleDropdownClick}
+        />
+      </Flex>
 
       <Grid templateColumns="repeat(4, 1fr)" gap="20" bgColor="gray.800">
         {filteredCountries.map((country) => (
           <CountryCard key={country.cca2} country={country} />
         ))}
       </Grid>
-    </Box>
+    </Flex>
   );
 }
