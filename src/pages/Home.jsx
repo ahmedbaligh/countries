@@ -4,10 +4,24 @@ import axios from 'axios';
 
 import CountryCard from '../components/CountryCard';
 import { InputField } from '../components/InputField';
+import { SelectMenu } from '../components/SelectMenu';
+
+const regions = [
+  { value: 'africa', label: 'Africa' },
+  { value: 'americas', label: 'Americas' },
+  { value: 'asia', label: 'Asia' },
+  { value: 'europe', label: 'Europe' },
+  { value: 'oceania', label: 'Oceania' }
+];
 
 export function Home() {
   const [countries, setCountries] = useState([]);
   const [search, setSearch] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState('');
+
+  const handleDropdownClick = e => {
+    setSelectedRegion(e.target.value);
+  };
 
   useEffect(() => {
     async function getCountries() {
@@ -27,9 +41,16 @@ export function Home() {
         onInputChange={e => setSearch(e.target.value)}
       />
 
+      <SelectMenu
+        placeholder="Filter By Region"
+        options={regions}
+        value={selectedRegion}
+        onChange={handleDropdownClick}
+      />
+
       <Grid templateColumns="repeat(4, 1fr)" gap="20" bgColor="gray.800">
         {countries.map(country => (
-          <CountryCard key={country.id} country={country} />
+          <CountryCard key={country.cca2} country={country} />
         ))}
       </Grid>
     </Box>
