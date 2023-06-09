@@ -4,7 +4,8 @@ const Container = defineStyleConfig({
   baseStyle: {
     maxW: '1440px',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    px: 20
   }
 });
 
@@ -25,5 +26,14 @@ export const theme = extendTheme({
     body: "'Nunito Sans', sans-serif",
     heading: "'Nunito Sans', sans-serif"
   },
-  components: { Container }
+  components: { Container },
+  styles: {
+    global: {
+      '#root': {
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column'
+      }
+    }
+  }
 });

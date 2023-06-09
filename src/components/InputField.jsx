@@ -6,7 +6,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 export function InputField({ placeholder, value, onInputChange, ...props }) {
   return (
     <Flex
-      gap="3"
+      gap="6"
       align="center"
       px="8"
       py="2"
@@ -17,17 +17,18 @@ export function InputField({ placeholder, value, onInputChange, ...props }) {
       {...props}
       bg={useColorModeValue('gray.100', 'blue.700')}
     >
-      <FontAwesomeIcon icon={faMagnifyingGlass} fontSize="1rem" color="gray" />
+      <FontAwesomeIcon icon={faMagnifyingGlass} fontSize="1rem" color={useColorModeValue('gray', 'white')} />
 
       <Input
         border="none"
         fontSize="inherit"
         fontWeight="inherit"
         p="0"
-        _placeholder={{ color: 'gray.600' }}
+        _placeholder={{ color: useColorModeValue('gray.600', 'white'), opacity: 0.8 }}
         placeholder={placeholder}
         value={value}
         onChange={onInputChange}
+        _focusVisible={{}}
       />
     </Flex>
   );

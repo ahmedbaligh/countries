@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Grid, Flex, Container } from '@chakra-ui/react';
+import { Grid, Flex, Container, useColorModeValue } from '@chakra-ui/react';
 import axios from 'axios';
 
 import CountryCard from '../components/CountryCard';
@@ -43,7 +43,7 @@ export function Home() {
   });
 
   return (
-    <Container py="12" gap="16" bg="gray.100">
+    <Container flex={1} py="12" gap="16" bg={useColorModeValue('gray.100', 'blue.800')}>
       <Flex justify="space-between">
         <InputField
           placeholder="Search for a country..."
