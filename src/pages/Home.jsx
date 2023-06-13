@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Grid, Box } from "@chakra-ui/react";
+import { Grid, Container, Flex, useColorModeValue } from "@chakra-ui/react";
 
 import CountryCard from "../components/CountryCard";
 import { InputField } from "../components/InputField";
@@ -34,22 +34,25 @@ export function Home() {
 
         return includesName && inRegion;
       })
-    : null;
+    : [];
 
   return (
-    <Box>
-      <InputField
-        placeholder="Type a keyword to search with"
-        value={searchQuery}
-        onInputChange={e => setSearchQuery(e.target.value)}
-      />
+    <Container flex={1} py="12" gap="16" bg={useColorModeValue("gray.100", "blue.800")}>
+      <Flex justify="space-between">
+        <InputField
+          placeholder="Search for a country..."
+          value={searchQuery}
+          onInputChange={e => setSearchQuery(e.target.value)}
+          minW="500px"
+        />
 
-      <SelectMenu
-        placeholder="Filter By Region"
-        options={regions}
-        value={selectedRegion}
-        onChange={handleDropdownClick}
-      />
+        <SelectMenu
+          placeholder="Filter By Region"
+          options={regions}
+          value={selectedRegion}
+          onChange={handleDropdownClick}
+        />
+      </Flex>
 
       <Grid templateColumns="repeat(4, 1fr)" gap="20" bgColor="gray.800">
         {error ? (
@@ -62,6 +65,6 @@ export function Home() {
           filteredCountries.map(country => <CountryCard key={country.cca2} country={country} />)
         )}
       </Grid>
-    </Box>
+    </Container>
   );
 }

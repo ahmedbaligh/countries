@@ -1,45 +1,38 @@
-import React from "react";
-import { Box, Image, Text, Flex } from "@chakra-ui/react";
+import React from 'react';
+import { Box, Image, Text, Flex, Heading, useColorModeValue } from '@chakra-ui/react';
 
 function CountryCard({ country }) {
   return (
-    <Box bg="blue.800" borderRadius="md" pb="16">
-      <Image
-        src={country.flags.svg}
-        alt={country.flags.alt}
-        w="full"
-        h="52"
-        objectFit="cover"
-      />
+    <Box
+      shadow="md"
+      borderRadius="md"
+      pb="8"
+      bg={useColorModeValue('white', 'blue.700')}
+      color={useColorModeValue('black', 'white')}
+    >
+      <Image src={country.flags.svg} alt={country.flags.alt} w="full" h="36" objectFit="cover" />
 
-      <Flex
-        flexDirection="column"
-        gap="2"
-        px="8"
-        pt="6"
-        color="white"
-        fontWeight="600"
-      >
-        <Text as="h2" fontSize="2xl" fontWeight="800" mb="4">
+      <Flex flexDirection="column" gap="2" px="6" pt="6" fontWeight="600">
+        <Heading as="h2" size="md" fontWeight="800" mb="4">
           {country.name.common}
-        </Text>
+        </Heading>
 
         <Text>
-          Population: {""}
+          Population: {''}
           <Text as="span" fontWeight="300">
             {country.population.toLocaleString()}
           </Text>
         </Text>
 
         <Text>
-          Region: {""}
+          Region: {''}
           <Text as="span" fontWeight="300">
             {country.region}
           </Text>
         </Text>
 
         <Text>
-          Capital: {""}
+          Capital: {''}
           <Text as="span" fontWeight="300">
             {country.capital}
           </Text>
