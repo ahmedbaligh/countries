@@ -13,8 +13,6 @@ export const useFetch = url => {
         setIsLoading(true);
         const result = await axios.get(url);
 
-        await delay(2000);
-
         setData(result.data);
         setIsLoading(false);
       } catch (e) {
@@ -32,5 +30,3 @@ export const useFetch = url => {
     error
   };
 };
-
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));

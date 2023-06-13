@@ -9,6 +9,7 @@ function CountryCard({ country }) {
       pb="8"
       bg={useColorModeValue('white', 'blue.700')}
       color={useColorModeValue('black', 'white')}
+      overflow="hidden"
     >
       <Image src={country.flags.svg} alt={country.flags.alt} w="full" h="36" objectFit="cover" />
 

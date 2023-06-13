@@ -1,25 +1,25 @@
-import { useState } from "react";
-import { Grid, Container, Flex, useColorModeValue } from "@chakra-ui/react";
+import { useState } from 'react';
+import { Grid, Container, Flex } from '@chakra-ui/react';
 
-import CountryCard from "../components/CountryCard";
-import { InputField } from "../components/InputField";
-import { SelectMenu } from "../components/SelectMenu";
+import CountryCard from '../components/CountryCard';
+import { InputField } from '../components/InputField';
+import { SelectMenu } from '../components/SelectMenu';
 
-import { useFetch } from "../hooks/useFetch";
+import { useFetch } from '../hooks/useFetch';
 
 const regions = [
-  { value: "africa", label: "Africa" },
-  { value: "americas", label: "Americas" },
-  { value: "asia", label: "Asia" },
-  { value: "europe", label: "Europe" },
-  { value: "oceania", label: "Oceania" }
+  { value: 'africa', label: 'Africa' },
+  { value: 'americas', label: 'Americas' },
+  { value: 'asia', label: 'Asia' },
+  { value: 'europe', label: 'Europe' },
+  { value: 'oceania', label: 'Oceania' }
 ];
 
 export function Home() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedRegion, setSelectedRegion] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState('');
 
-  const { data: countries, isLoading, error } = useFetch("https://restcountries.com/v3.1/all");
+  const { data: countries, isLoading, error } = useFetch('https://restcountries.com/v3.1/all');
 
   const handleDropdownClick = e => {
     setSelectedRegion(e.target.value);
@@ -37,13 +37,13 @@ export function Home() {
     : [];
 
   return (
-    <Container flex={1} py="12" gap="16" bg={useColorModeValue("gray.100", "blue.800")}>
-      <Flex justify="space-between">
+    <Container flex={1} py="12" gap="16">
+      <Flex flexDir={{ base: 'column', md: 'row' }} gap={{ base: 12, md: 4 }} justify="space-between">
         <InputField
           placeholder="Search for a country..."
           value={searchQuery}
           onInputChange={e => setSearchQuery(e.target.value)}
-          minW="500px"
+          minW={{ md: '500px' }}
         />
 
         <SelectMenu
@@ -54,7 +54,11 @@ export function Home() {
         />
       </Flex>
 
-      <Grid templateColumns="repeat(4, 1fr)" gap="20" bgColor="gray.800">
+      <Grid
+        templateColumns={['1fr', '1fr 1fr', null, 'repeat(3, 1fr)', 'repeat(4, 1fr)']}
+        gap={[8, null, 12, 20]}
+        px={[8, 0]}
+      >
         {error ? (
           <p>{error.message}</p>
         ) : isLoading ? (
