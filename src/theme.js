@@ -5,7 +5,7 @@ const Container = defineStyleConfig({
     maxW: '1440px',
     display: 'flex',
     flexDirection: 'column',
-    px: 20
+    px: [4, null, 12, 16, 20]
   }
 });
 
