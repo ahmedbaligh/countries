@@ -8,8 +8,14 @@ import { useFetch } from '../hooks/useFetch';
 export function CountryDetails() {
   const { countryID } = useParams();
 
-  const { data, isLoading, error } = useFetch(`https://restcountries.com/v3.1/alpha/${countryID}`);
   const buttonBg = useColorModeValue('white', 'blue.700');
+  const { data, isLoading } = useFetch(`https://restcountries.com/v3.1/alpha/${countryID}`);
+  const countryCodes = data ? data[0].borders.join(',') : '';
+  const { data: borderCountries, isLoading: isBorderCountriesLoading } = useFetch(
+    `https://restcountries.com/v3.1/alpha?codes=${countryCodes}`
+  );
+
+  console.log(borderCountries);
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -63,25 +69,27 @@ export function CountryDetails() {
             flexDir={['column', null, null, 'row']}
             mt={{ base: 4, lg: 8 }}
           >
-            <Heading fontWeight="600" as="h3" size="sm">
+            <Heading flexShrink="0" fontWeight="600" as="h3" size="sm">
               Border Countries:
             </Heading>
 
             <Flex gap="2" flexWrap="wrap">
-              {country.borders.map(countryCode => (
-                <Button
-                  key={countryCode}
-                  bg={buttonBg}
-                  shadow="sm"
-                  borderRadius="sm"
-                  fontWeight="300"
-                  minWidth={{ base: 24, lg: '28' }}
-                  h="8"
-                  fontSize={{ base: 'sm', lg: 'md' }}
-                >
-                  {countryCode}
-                </Button>
-              ))}
+              {isBorderCountriesLoading
+                ? '...'
+                : borderCountries.map(borderCountry => (
+                    <Button
+                      key={borderCountry.cca2}
+                      bg={buttonBg}
+                      shadow="sm"
+                      borderRadius="sm"
+                      fontWeight="300"
+                      minWidth={{ base: 24, lg: '28' }}
+                      h="8"
+                      fontSize={{ base: 'sm', lg: 'md' }}
+                    >
+                      {borderCountry.name.common}
+                    </Button>
+                  ))}
             </Flex>
           </Flex>
         </Flex>
