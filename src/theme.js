@@ -22,6 +22,9 @@ export const theme = extendTheme({
       600: 'hsl(0, 0%, 52%)'
     }
   },
+  shadows: {
+    sm: '0px 2px 5px rgba(0, 0, 0, 0.1), 2px 0px 5px rgba(0, 0, 0, 0.1)'
+  },
   fonts: {
     body: "'Nunito Sans', sans-serif",
     heading: "'Nunito Sans', sans-serif"
