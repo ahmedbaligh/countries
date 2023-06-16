@@ -1,5 +1,5 @@
 import { Button, Image, Container, Heading, Text, Flex, useColorModeValue } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,12 +10,10 @@ export function CountryDetails() {
 
   const buttonBg = useColorModeValue('white', 'blue.700');
   const { data, isLoading } = useFetch(`https://restcountries.com/v3.1/alpha/${countryID}`);
-  const countryCodes = data ? data[0].borders.join(',') : '';
+  const countryCodes = data ? (data[0].borders ? data[0].borders.join(',') : undefined) : undefined;
   const { data: borderCountries, isLoading: isBorderCountriesLoading } = useFetch(
     `https://restcountries.com/v3.1/alpha?codes=${countryCodes}`
   );
-
-  console.log(borderCountries);
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -29,6 +27,8 @@ export function CountryDetails() {
   return (
     <Container flex={1} py="14" gap={{ base: 20, lg: 16 }}>
       <Button
+        as={Link}
+        to="/"
         leftIcon={<FontAwesomeIcon icon={faArrowLeft} />}
         bg={buttonBg}
         shadow="sm"
@@ -63,35 +63,37 @@ export function CountryDetails() {
             </Flex>
           </Flex>
 
-          <Flex
-            gap="4"
-            align={['flex-start', null, null, 'center']}
-            flexDir={['column', null, null, 'row']}
-            mt={{ base: 4, lg: 8 }}
-          >
-            <Heading flexShrink="0" fontWeight="600" as="h3" size="sm">
-              Border Countries:
-            </Heading>
+          {borderCountries && (
+            <Flex
+              gap="4"
+              align={['flex-start', null, null, 'center']}
+              flexDir={['column', null, null, 'row']}
+              mt={{ base: 4, lg: 8 }}
+            >
+              <Heading flexShrink="0" fontWeight="600" as="h3" size="sm">
+                Border Countries:
+              </Heading>
 
-            <Flex gap="2" flexWrap="wrap">
-              {isBorderCountriesLoading
-                ? '...'
-                : borderCountries.map(borderCountry => (
-                    <Button
-                      key={borderCountry.cca2}
-                      bg={buttonBg}
-                      shadow="sm"
-                      borderRadius="sm"
-                      fontWeight="300"
-                      minWidth={{ base: 24, lg: '28' }}
-                      h="8"
-                      fontSize={{ base: 'sm', lg: 'md' }}
-                    >
-                      {borderCountry.name.common}
-                    </Button>
-                  ))}
+              <Flex gap="2" flexWrap="wrap">
+                {borderCountries.map(borderCountry => (
+                  <Button
+                    key={borderCountry.cca2}
+                    as={Link}
+                    to={`/country/${borderCountry.cca2}`}
+                    bg={buttonBg}
+                    shadow="sm"
+                    borderRadius="sm"
+                    fontWeight="300"
+                    minWidth={{ base: 24, lg: '28' }}
+                    h="8"
+                    fontSize={{ base: 'sm', lg: 'md' }}
+                  >
+                    {borderCountry.name.common}
+                  </Button>
+                ))}
+              </Flex>
             </Flex>
-          </Flex>
+          )}
         </Flex>
       </Flex>
     </Container>

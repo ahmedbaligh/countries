@@ -1,9 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Box, Image, Text, Flex, Heading, useColorModeValue } from '@chakra-ui/react';
 
 function CountryCard({ country }) {
   return (
     <Box
+      as={Link}
+      to={`/country/${country.cca2}`}
       shadow="md"
       borderRadius="md"
       pb="8"
