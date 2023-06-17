@@ -7,14 +7,19 @@ export const useFetch = (url, { enabled = true, shouldCache = false } = {}) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function fetchData() {
       try {
         setError(null);
         setIsLoading(true);
-        const result = await axios.get(url);
+        const result = await axios.get(url, {
+          signal: controller.signal
+        });
 
         setData(result.data);
         setIsLoading(false);
+        setError(null);
 
         if (shouldCache) {
           sessionStorage.setItem(url, JSON.stringify(result.data));
@@ -38,6 +43,10 @@ export const useFetch = (url, { enabled = true, shouldCache = false } = {}) => {
     }
 
     fetchData();
+
+    return () => {
+      controller.abort();
+    };
   }, [url, enabled, shouldCache]);
 
   return {
