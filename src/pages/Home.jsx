@@ -19,7 +19,13 @@ export function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('');
 
-  const { data: countries, isLoading, error } = useFetch('https://restcountries.com/v3.1/all');
+  const {
+    data: countries,
+    isLoading,
+    error
+  } = useFetch('https://restcountries.com/v3.1/all', {
+    shouldCache: true
+  });
 
   const handleDropdownClick = e => {
     setSelectedRegion(e.target.value);
