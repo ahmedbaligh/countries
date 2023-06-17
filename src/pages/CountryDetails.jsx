@@ -11,9 +11,9 @@ export function CountryDetails() {
   const buttonBg = useColorModeValue('white', 'blue.700');
   const { data, isLoading } = useFetch(`https://restcountries.com/v3.1/alpha/${countryID}`);
   const countryCodes = data ? (data[0].borders ? data[0].borders.join(',') : undefined) : undefined;
-  const { data: borderCountries, isLoading: isBorderCountriesLoading } = useFetch(
-    `https://restcountries.com/v3.1/alpha?codes=${countryCodes}`
-  );
+  const { data: borderCountries } = useFetch(`https://restcountries.com/v3.1/alpha?codes=${countryCodes}`, {
+    enabled: !!countryCodes
+  });
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -57,7 +57,7 @@ export function CountryDetails() {
             </Flex>
 
             <Flex flexDir="column" gap="1.5">
-              <CountryDetail label="Top Level Doamn" value={country.tld[0]} />
+              {country.tld && <CountryDetail label="Top Level Doamn" value={country.tld[0]} />}
               <CountryDetail label="Currencies" value={currencyName} />
               <CountryDetail label="Languages" value={formmatedLanguages} />
             </Flex>
