@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const useFetch = url => {
+export const useFetch = (url, options = { enabled: true }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,8 +21,10 @@ export const useFetch = url => {
       }
     }
 
+    if (!options.enabled) return;
+
     fetchData();
-  }, [url]);
+  }, [url, options.enabled]);
 
   return {
     data,

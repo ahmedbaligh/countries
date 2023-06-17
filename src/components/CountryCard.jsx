@@ -1,15 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Box, Image, Text, Flex, Heading, useColorModeValue } from '@chakra-ui/react';
 
 function CountryCard({ country }) {
   return (
     <Box
+      as={Link}
+      to={`/country/${country.cca2}`}
       shadow="md"
       borderRadius="md"
       pb="8"
       bg={useColorModeValue('white', 'blue.700')}
       color={useColorModeValue('black', 'white')}
       overflow="hidden"
+      transform="auto"
+      transition="transform 0.3s"
+      _hover={{ scale: 1.05 }}
     >
       <Image src={country.flags.svg} alt={country.flags.alt} w="full" h="36" objectFit="cover" />
 
